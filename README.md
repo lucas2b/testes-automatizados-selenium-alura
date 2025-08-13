@@ -1,83 +1,72 @@
-# 🏷️ Sistema de Leilões — Spring Boot
+# 🧪 Testes Automatizados com Selenium – Projeto de Leilões
 
-Aplicação web desenvolvida em **Java** com **Spring Boot** para gerenciamento de leilões online.  
-Permite cadastro, listagem e acompanhamento de leilões, com sistema de login, controle de lances e interface web responsiva.
+Este repositório contém testes automatizados desenvolvidos para validar o fluxo de um sistema de leilões.  
+A implementação dos testes utiliza **Java**, **JUnit 5** e **Selenium WebDriver**, aplicando boas práticas de automação e padrões de projeto.
 
----
+## 🚀 Tecnologias Utilizadas
 
-## ✨ Funcionalidades
+- **Java 11+**
+- **JUnit 5** – framework de testes
+- **Selenium WebDriver** – automação de interface
+- **ChromeDriver** – execução dos testes no navegador Google Chrome
 
-- 🔒 **Autenticação e autorização** com Spring Security  
-- 📜 **Cadastro e listagem de leilões** com formulários validados  
-- 💸 **Registro de lances** e atualização da lista de participantes  
-- 🖥️ **Interface web responsiva** utilizando HTML + Bootstrap  
-- 🗄️ **Banco de dados pré-configurado** com script `data.sql`  
+## 📐 Padrões de Projeto Utilizados
 
----
+### 1. **Page Object Pattern**
+Organiza o código separando a lógica de interação com a interface em classes que representam páginas ou componentes do sistema.  
+Benefícios:
+- Reutilização de código
+- Facilidade de manutenção
+- Leitura mais clara dos testes
 
-## 📂 Estrutura do Projeto
+**Exemplo de classes Page Object no projeto:**
+- `LoginPage` – responsável pela autenticação
+- `ListaDeLeiloesPage` – página de listagem de leilões
+- `CadastroLeilaoPage` – formulário de criação de leilão
 
+### 2. **Encapsulamento de Ações**
+As interações com elementos da página (cliques, preenchimento de campos, verificações) são encapsuladas nos métodos das páginas, evitando repetição nos testes.
+
+### 3. **Organização por Pacotes**
+- `br.com.alura.login` → testes e page objects relacionados à autenticação
+- `br.com.alura.leiloes` → testes e page objects do módulo de leilões
+
+## 🧪 Estrutura dos Testes
+
+📂 `src/test/java`  
 ```
-src/main/java/br/com/alura/leilao
-├── controller/       # Controllers da aplicação
-├── dto/              # Objetos de transferência de dados
-├── model/            # Entidades JPA
-├── repositories/     # Repositórios Spring Data JPA
-├── security/         # Configurações de autenticação e autorização
-├── service/          # Serviços de negócio
-src/main/resources
-├── templates/        # Páginas HTML (Thymeleaf)
-├── static/css/       # Arquivos de estilo (Bootstrap)
-├── application.properties
-└── data.sql
+├── br.com.alura.login
+│   ├── LoginPage.java       # Page Object para tela de login
+│   └── LoginTest.java       # Testes de login
+└── br.com.alura.leiloes
+    ├── CadastroLeilaoPage.java   # Page Object para cadastro de leilões
+    ├── ListaDeLeiloesPage.java   # Page Object para listagem
+    └── LeiloesTest.java          # Testes de criação e visualização de leilões
 ```
 
----
+## 🔍 Fluxos Testados
 
-## 🛠 Tecnologias Utilizadas
+- Login com credenciais válidas e inválidas
+- Cadastro de novos leilões
+- Listagem e verificação de leilões cadastrados
 
-- ☕ Java  
-- 🚀 Spring Boot  
-- 🔐 Spring Security  
-- 🗃️ Spring Data JPA  
-- 🎨 Thymeleaf + Bootstrap  
-- 🧪 JUnit  
+## ▶️ Como Executar os Testes
 
----
+1. **Clonar o repositório**
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
 
-## ▶️ Como Executar
+2. **Configurar o ChromeDriver**  
+Baixar a versão compatível com seu Chrome e colocar no `PATH` do sistema.
 
-1. **Clone o repositório**
-   ```bash
-   git clone https://github.com/seuusuario/seurepositorio.git
-   ```
+3. **Executar os testes**
+```bash
+./mvnw test
+```
 
-2. **Entre na pasta do projeto**
-   ```bash
-   cd seurepositorio
-   ```
+Os testes serão executados em um navegador Chrome controlado pelo Selenium.
 
-3. **Execute o projeto**
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-
-4. **Acesse no navegador**
-   ```
-   http://localhost:8080
-   ```
-
----
-
-## 🧪 Testes Automatizados
-
-O projeto inclui testes de integração e de interface (UI) utilizando Selenium e JUnit para validar as principais funcionalidades do sistema.
-
----
-
-## 📜 Licença
-
-Este projeto é distribuído sob a licença MIT.  
-Sinta-se livre para usar, modificar e compartilhar.
-
----
+## 📄 Licença
+Este projeto está licenciado sob a licença MIT.
